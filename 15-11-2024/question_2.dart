@@ -1,13 +1,13 @@
 // Write a program that prints all numbers from a list that are less than 5.
 
-void main() {
+/* void main() {
   List<int> a = [1, 1, 2, 3, 5, 8, 13, 21, 4, 34, 2, 55, 89];
   for (var i in a) {
     if (i < 5) {
       print(i);
     }
   }
-}
+} */
 
 // with user input
 

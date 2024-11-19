@@ -1,6 +1,6 @@
 // Write a program to calculate the sum of natural numbers until 'n'.
 
-void main() {
+/* void main() {
   int n = 100;
   int result = 0;
   for (int i = 1; i <= n; i++) {
@@ -8,7 +8,7 @@ void main() {
     result = result + i;
   }
   print(result);
-}
+} */
 
 // with user input
 

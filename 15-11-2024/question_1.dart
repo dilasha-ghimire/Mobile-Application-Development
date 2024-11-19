@@ -10,5 +10,5 @@ void main() {
   print("How old are you?");
   int? age = int.parse(stdin.readLineSync()!);
 
-  print("Your name is $name\nYou have ${100 - age} years to be 100 years old.");
+  print("Your name is $name.\nYou have ${100 - age} years to be 100 years old.");
 }

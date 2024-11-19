@@ -7,8 +7,9 @@ void main() {
   String input = stdin.readLineSync()!.toLowerCase();
   String reversed = input.split('').reversed.join('');
   if (input == reversed) {
-    print("The word is a palindrome.");
-  } else {
-    print("The word is not a palindrome.");
+    print("The word is a palindrome");
+  } 
+  else {
+    print("The word is not a palindrome");
   }
 }

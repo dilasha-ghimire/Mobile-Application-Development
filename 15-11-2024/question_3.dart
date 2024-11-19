@@ -1,7 +1,7 @@
 // Create a program that returns a list that contains only the elements that are
 // common between the two lists (without duplicates).
 
-void main() {
+/* void main() {
   // Set removes duplicates by themselves.
   Set<int> a = {1, 1, 2, 3, 4, 4, 5};
   print(a);
@@ -10,7 +10,7 @@ void main() {
 
   Set<int> commonElements = a.intersection(b);
   print("Common elements between the two lists: $commonElements");
-}
+} */
 
 // with user input
 
