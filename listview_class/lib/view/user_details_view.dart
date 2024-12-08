@@ -85,8 +85,8 @@ class _UserDetailsViewState extends State<UserDetailsView> {
               child: ElevatedButton(
                 onPressed: (){
                   User user = User(
-                    first_name: _firstNameController.text.trim(),
-                    last_name: _lastNameController.text.trim(),
+                    firstName: _firstNameController.text.trim(),
+                    lastName: _lastNameController.text.trim(),
                     city: city!
                   );
                   setState(() {

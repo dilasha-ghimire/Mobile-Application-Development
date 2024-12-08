@@ -20,7 +20,7 @@ class UserListView extends StatelessWidget {
     
           return ListTile(
             leading: const Icon(Icons.wysiwyg),
-            title: Text(userList[index].first_name + " " + userList[index].last_name),
+            title: Text("${userList[index].firstName} ${userList[index].lastName}"),
             subtitle: Text(userList[index].city),
             trailing: IconButton(
               onPressed: (){}, 

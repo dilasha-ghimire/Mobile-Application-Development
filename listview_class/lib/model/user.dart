@@ -1,11 +1,7 @@
-class User{
-  final String first_name;
-  final String last_name;
+class User {
+  final String firstName;
+  final String lastName;
   final String city;
 
-  User({
-    required this.first_name,
-    required this.last_name,
-    required this.city
-  });
+  User({required this.firstName, required this.lastName, required this.city});
 }
