@@ -1,4 +1,6 @@
-import 'package:myfirstflutter/view/card_view.dart';
+import 'package:myfirstflutter/view/ironman_view.dart';
+// import 'package:myfirstflutter/view/stack_view.dart';
+// import 'package:myfirstflutter/view/card_view.dart';
 // import 'package:myfirstflutter/view/flexible_expanded_view.dart';
 // import 'package:myfirstflutter/view/load_image_view.dart';
 // import 'package:myfirstflutter/view/show_snackbar_view.dart';
@@ -24,7 +26,9 @@ class MyApp extends StatelessWidget {
       // home: ShowSnackbarView(),
       // home: LoadImageView(),
       // home: FlexibleExpandedView().
-      home: CardView(),
+      // home: CardView(),
+      //home: StackView(),
+      home: IronmanView(),
     );
   }
 }
