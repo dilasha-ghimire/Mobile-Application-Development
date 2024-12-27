@@ -4,8 +4,8 @@ import 'package:bloc_task/view/cubit/user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class UserDetailsView extends StatelessWidget {
-  const UserDetailsView({super.key});
+class UserCubitView extends StatelessWidget {
+  const UserCubitView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class UserDetailsView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('User Details Cubit'),
+        title: const Text('User Cubit'),
         centerTitle: true,
         elevation: 10,
       ),
@@ -57,6 +57,7 @@ class UserDetailsView extends StatelessWidget {
                 border: OutlineInputBorder(),
               ),
             ),
+            gap,
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -81,15 +82,6 @@ class UserDetailsView extends StatelessWidget {
               ),
             ),
             gap,
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, "/output");
-                },
-                child: const Text("View users"),
-              ),
-            ),
             const UserListView(),
           ],
         ),
