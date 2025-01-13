@@ -1,0 +1,29 @@
+# HIVE DATABASE
+
+step 1: /lib/app/constants/hive_table_constant.dart
+step 2: /lib/features/../domain/entity/entity.dart
+step 3: /lib/features/../data/model/hive_model.dart
+step 4: terminal 'dart run build_runner build -d'
+        any model created run this file to create adapter class
+        '-d' regenerates adapter file
+
+
+/lib/core/error/failure.dart - to handle failure
+/lib/features/../domain/repository/repository.dart
+/lib/core/network/hive_service.dart 
+- to interact with hive database and write queries
+
+/lib/features/../data/data_source/
+/lib/features/../data/repository/
+/lib/features/../domain/usecase/
+
+
+# PRESENTATION LAYER
+
+di.dart
+presentation/ 
+             view/view.dart
+             view_model/bloc/
+                             bloc.dart
+                             event.dart
+                             state.dart
