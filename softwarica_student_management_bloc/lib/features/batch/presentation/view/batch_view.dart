@@ -37,29 +37,16 @@ class BatchView extends StatelessWidget {
                 onPressed: () {
                   if (_batchViewFormKey.currentState!.validate()) {
                     context.read<BatchBloc>().add(
-                          AddBatch(
-                            batchNameController.text.trim(),
-                          ),
+                          AddBatch(batchNameController.text),
                         );
-                    // BlocProvider.of<BatchBloc>(context).add(
-                    //   AddBatch(
-                    //     BatchEntity(
-                    //       batchName: batchNameController.text.trim(),
-                    //     ),
-                    //   ),
-                    // );
                   }
                 },
-                child: BlocBuilder<BatchBloc, BatchState>(
-                  builder: (context, state) {
-                    return Text('Add Batch');
-                  },
-                ),
+                child: Text('Add Batch'),
               ),
-              SizedBox(height: 8),
+              SizedBox(height: 10),
               BlocBuilder<BatchBloc, BatchState>(builder: (context, state) {
                 if (state.batches.isEmpty) {
-                  return Text("No data found");
+                  return Center(child: Text('No Batches Added Yet'));
                 } else if (state.isLoading) {
                   return CircularProgressIndicator();
                 } else if (state.error != null) {
@@ -75,15 +62,13 @@ class BatchView extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return ListTile(
                           title: Text(state.batches[index].batchName),
+                          subtitle: Text(state.batches[index].batchId!),
                           trailing: IconButton(
                             icon: Icon(Icons.delete),
                             onPressed: () {
                               context.read<BatchBloc>().add(
                                     DeleteBatch(state.batches[index].batchId!),
                                   );
-                              // BlocProvider.of<BatchBloc>(context).add(
-                              //   DeleteBatch(state.batches[index].id),
-                              // );
                             },
                           ),
                         );

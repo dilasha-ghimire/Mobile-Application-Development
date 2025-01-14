@@ -9,17 +9,21 @@ class DeleteBatchParams extends Equatable {
 
   const DeleteBatchParams({required this.batchId});
 
+  const DeleteBatchParams.empty() : batchId = '_empty.string';
+
   @override
-  List<Object?> get props => [batchId];
+  List<Object?> get props => [
+        batchId,
+      ];
 }
 
 class DeleteBatchUsecase implements UsecaseWithParams<void, DeleteBatchParams> {
-  // check internet
-  final IBatchRepository repository;
+  final IBatchRepository batchRepository;
 
-  DeleteBatchUsecase({required this.repository});
+  DeleteBatchUsecase({required this.batchRepository});
+
   @override
   Future<Either<Failure, void>> call(DeleteBatchParams params) async {
-    return await repository.deleteBatch(params.batchId);
+    return await batchRepository.deleteBatch(params.batchId);
   }
 }

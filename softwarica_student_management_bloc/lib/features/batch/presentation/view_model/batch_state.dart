@@ -1,6 +1,5 @@
 part of 'batch_bloc.dart';
 
-
 class BatchState extends Equatable {
   final List<BatchEntity> batches;
   final bool isLoading;
@@ -16,11 +15,9 @@ class BatchState extends Equatable {
     return BatchState(
       batches: [],
       isLoading: false,
-      error: null,
     );
   }
 
-// copywidth constructor
   BatchState copyWith({
     List<BatchEntity>? batches,
     bool? isLoading,

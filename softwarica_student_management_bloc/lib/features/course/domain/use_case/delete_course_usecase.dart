@@ -5,22 +5,26 @@ import 'package:softwarica_student_management_bloc/core/error/failure.dart';
 import 'package:softwarica_student_management_bloc/features/course/domain/repository/course_repository.dart';
 
 class DeleteCourseParams extends Equatable {
-  final String courseId;
+  final String id;
 
-  const DeleteCourseParams({required this.courseId});
+  const DeleteCourseParams({required this.id});
+
+  const DeleteCourseParams.empty() : id = '_empty.string';
 
   @override
-  List<Object?> get props => [courseId];
+  List<Object?> get props => [id];
 }
 
+// Use case
 class DeleteCourseUsecase
     implements UsecaseWithParams<void, DeleteCourseParams> {
-  // check internet
-  final ICourseRepository repository;
+  final ICourseRepository _courseRepository;
 
-  DeleteCourseUsecase({required this.repository});
+  DeleteCourseUsecase({required ICourseRepository courseRepository})
+      : _courseRepository = courseRepository;
+
   @override
-  Future<Either<Failure, void>> call(DeleteCourseParams params) async {
-    return await repository.deleteCourse(params.courseId);
+  Future<Either<Failure, void>> call(DeleteCourseParams params) {
+    return _courseRepository.deleteCourse(params.id);
   }
 }

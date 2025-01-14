@@ -4,13 +4,13 @@ import 'package:softwarica_student_management_bloc/core/error/failure.dart';
 import 'package:softwarica_student_management_bloc/features/batch/domain/entity/batch_entity.dart';
 import 'package:softwarica_student_management_bloc/features/batch/domain/repository/batch_repository.dart';
 
-class GetAllBatchUsecase implements UsecaseWithoutParams<List<BatchEntity>> {
+class GetAllBatchUseCase implements UsecaseWithoutParams<List<BatchEntity>> {
+  final IBatchRepository batchRepository;
 
-  final IBatchRepository repository;
+  GetAllBatchUseCase({required this.batchRepository});
 
-  GetAllBatchUsecase({required this.repository});
   @override
-  Future<Either<Failure, List<BatchEntity>>> call() async{
-    return await repository.getAllBatches();
+  Future<Either<Failure, List<BatchEntity>>> call() {
+    return batchRepository.getBatches();
   }
 }
