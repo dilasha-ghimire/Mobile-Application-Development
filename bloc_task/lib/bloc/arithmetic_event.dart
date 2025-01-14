@@ -1,6 +1,5 @@
 part of 'arithmetic_bloc.dart';
 
-@immutable
 sealed class ArithmeticEvent {}
 
 class AdditionEvent extends ArithmeticEvent {
