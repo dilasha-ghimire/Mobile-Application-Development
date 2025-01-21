@@ -27,3 +27,15 @@ presentation/
                              bloc.dart
                              event.dart
                              state.dart
+
+
+# API 
+
+/lib/app/constants/api_endpoints.dart
+/lib/core/network/dio_error_interceptor.dart 
+- check for every status code
+/lib/features/../data/model/api_model.dart
+/lib/features/../data/data_source/remote_datasource.dart
+/lib/features../data/repository/remote_repository.dart
+/lib/app/di/di.dart
+- api service
