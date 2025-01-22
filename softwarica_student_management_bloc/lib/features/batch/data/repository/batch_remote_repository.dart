@@ -27,7 +27,16 @@ class BatchRemoteRepository implements IBatchRepository {
   }
 
   @override
-  Future<Either<Failure, List<BatchEntity>>> getBatches() {
-    throw UnimplementedError();
+  Future<Either<Failure, List<BatchEntity>>> getBatches() async {
+    try {
+      final batches = await batchRemoteDataSource.getBatches();
+      return Right(batches);
+    } catch (e) {
+      return Left(
+        ApiFailure(
+          message: e.toString(),
+        ),
+      );
+    }
   }
 }

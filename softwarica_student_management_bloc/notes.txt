@@ -39,3 +39,13 @@ presentation/
 /lib/features../data/repository/remote_repository.dart
 /lib/app/di/di.dart
 - api service
+
+# FETCHING DATA 
+
+/lib/features/../data/dto/get_all_dto.dart
+        - terminal 'dart run build_runner build -d'
+        - any model created run this file to create adapter class
+        - '-d' regenerates adapter file
+/lib/features/../data/data_source/remote_datasource.dart
+/lib/features/../data/repository/remote_repository.dart
+di.dart - usecases to remote_repository

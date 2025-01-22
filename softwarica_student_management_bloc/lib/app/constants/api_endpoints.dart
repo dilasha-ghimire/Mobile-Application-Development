@@ -9,7 +9,11 @@ class ApiEndpoints {
 
   // static const String baseUrl = "http://localhost:3001/api/v1/";
 
-  // ======================== Batch Course ==========================
+  // ======================== Batch Apis ==========================
   static const String createBatch = "batch/createBatch";
   static const String getAllBatch = "batch/getAllBatches";
+
+  // ======================== Course Apis =========================
+  static const String createCourse = "course/createCourse";
+  static const String getAllCourse = "course/getAllCourse";
 }
