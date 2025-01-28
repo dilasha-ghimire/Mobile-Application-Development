@@ -36,7 +36,7 @@ presentation/
 - check for every status code
 /lib/features/../data/model/api_model.dart
 /lib/features/../data/data_source/remote_datasource.dart
-/lib/features../data/repository/remote_repository.dart
+/lib/features/../data/repository/remote_repository.dart
 /lib/app/di/di.dart
 - api service
 
@@ -49,3 +49,6 @@ presentation/
 /lib/features/../data/data_source/remote_datasource.dart
 /lib/features/../data/repository/remote_repository.dart
 di.dart - usecases to remote_repository
+
+auth: wrote to json and from json code in model and 
+        created g.dart file for model instead of dto

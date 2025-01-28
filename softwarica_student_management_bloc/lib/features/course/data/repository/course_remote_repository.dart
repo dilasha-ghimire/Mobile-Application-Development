@@ -1,41 +1,47 @@
 import 'package:dartz/dartz.dart';
 import 'package:softwarica_student_management_bloc/core/error/failure.dart';
-import 'package:softwarica_student_management_bloc/features/course/data/data_source/course_remote_data_source.dart';
+import 'package:softwarica_student_management_bloc/features/course/data/data_source/remote_datasource/course_remote_datasource.dart';
 import 'package:softwarica_student_management_bloc/features/course/domain/entity/course_entity.dart';
 import 'package:softwarica_student_management_bloc/features/course/domain/repository/course_repository.dart';
 
 class CourseRemoteRepository implements ICourseRepository {
-  final CourseRemoteDataSource courseRemoteDataSource;
-
-  CourseRemoteRepository({required this.courseRemoteDataSource});
+  final CourseRemoteDatasource _courseRemoteDatasource;
+  CourseRemoteRepository(
+      {required CourseRemoteDatasource courseRemoteDatasource})
+      : _courseRemoteDatasource = courseRemoteDatasource;
 
   @override
-  Future<Either<Failure, void>> createCourse(CourseEntity course) async {
+  Future<Either<Failure, void>> createCourse(CourseEntity courseEntity) async {
     try {
-      courseRemoteDataSource.createCourse(course);
+      _courseRemoteDatasource.createCourse(courseEntity);
       return Right(null);
-    } catch (e) {
-      return Left(ApiFailure(
-        message: e.toString(),
-      ));
+    }
+    catch(e) {
+      return Left(
+        ApiFailure(
+          message: e.toString()
+        )
+      );
     }
   }
 
   @override
   Future<Either<Failure, void>> deleteCourse(String id) {
+    // TODO: implement deleteCourse
     throw UnimplementedError();
   }
 
   @override
-  Future<Either<Failure, List<CourseEntity>>> getCourses() async {
+  Future<Either<Failure, List<CourseEntity>>> getAllCourses() async {
     try {
-      final courses = await courseRemoteDataSource.getCourses();
+      final courses = await _courseRemoteDatasource.getCourses();
       return Right(courses);
-    } catch (e) {
+    }
+    catch(e) {
       return Left(
         ApiFailure(
-          message: e.toString(),
-        ),
+          message: e.toString()
+        )
       );
     }
   }

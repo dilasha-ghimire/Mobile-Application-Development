@@ -5,35 +5,37 @@ import 'package:softwarica_student_management_bloc/features/course/data/dto/get_
 import 'package:softwarica_student_management_bloc/features/course/data/model/course_api_model.dart';
 import 'package:softwarica_student_management_bloc/features/course/domain/entity/course_entity.dart';
 
-class CourseRemoteDataSource implements ICourseDataSource {
+class CourseRemoteDatasource implements ICourseDataSource {
   final Dio _dio;
-
-  CourseRemoteDataSource({
-    required Dio dio,
-  }) : _dio = dio;
+  CourseRemoteDatasource({required Dio dio})
+    : _dio = dio;
 
   @override
-  Future<void> createCourse(CourseEntity course) async {
+  Future<void> createCourse(CourseEntity courseEntity) async {
     try {
-      var courseApiModel = CourseApiModel.fromEntity(course);
+      var courseApiModel = CourseApiModel.fromEntity(courseEntity);
       var response = await _dio.post(
         ApiEndpoints.createCourse,
-        data: courseApiModel.toJson(),
+        data: courseApiModel.toJson()
       );
-      if (response.statusCode == 201) {
+      if(response.statusCode == 201) {
         return;
-      } else {
+      }
+      else {
         throw Exception(response.statusMessage);
       }
-    } on DioException catch (e) {
+    }
+    on DioException catch(e) {
       throw Exception(e);
-    } catch (e) {
+    }
+    catch(e) {
       throw Exception(e);
     }
   }
 
   @override
   Future<void> deleteCourse(String id) {
+    // TODO: implement deleteCourse
     throw UnimplementedError();
   }
 
@@ -41,15 +43,18 @@ class CourseRemoteDataSource implements ICourseDataSource {
   Future<List<CourseEntity>> getCourses() async {
     try {
       var response = await _dio.get(ApiEndpoints.getAllCourse);
-      if (response.statusCode == 200) {
-        GetAllCourseDTO courseAddDTO = GetAllCourseDTO.fromJson(response.data);
-        return CourseApiModel.toEntityList(courseAddDTO.data);
-      } else {
+      if(response.statusCode == 200) {
+        GetAllCourseDto courseDto = GetAllCourseDto.fromJson(response.data);
+        return CourseApiModel.toEntityList(courseDto.data);
+      }
+      else {
         throw Exception(response.statusMessage);
       }
-    } on DioException catch (e) {
+    }
+    on DioException catch(e) {
       throw Exception(e);
-    } catch (e) {
+    }
+    catch(e) {
       throw Exception(e);
     }
   }

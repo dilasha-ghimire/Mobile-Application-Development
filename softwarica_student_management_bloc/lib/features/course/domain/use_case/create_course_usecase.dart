@@ -10,24 +10,23 @@ class CreateCourseParams extends Equatable {
 
   const CreateCourseParams({required this.courseName});
 
-  // Empty constructor
-  const CreateCourseParams.empty() : courseName = '_empty.string';
+  const CreateCourseParams.empty() : courseName = "_empty.string";
 
   @override
   List<Object?> get props => [courseName];
 }
 
-class CreateCourseUsecase
-    implements UsecaseWithParams<void, CreateCourseParams> {
-  final ICourseRepository _courseRepository;
+class CreateCourseUsecase implements UsecaseWithParams<void, CreateCourseParams> {
+  final ICourseRepository courseRepository;
 
-  CreateCourseUsecase({required ICourseRepository courseRepository})
-      : _courseRepository = courseRepository;
+  CreateCourseUsecase({required this.courseRepository});
 
   @override
-  Future<Either<Failure, void>> call(CreateCourseParams params) {
-    return _courseRepository.createCourse(
-      CourseEntity(courseName: params.courseName),
+  Future<Either<Failure, void>> call(CreateCourseParams params) async{
+    return await courseRepository.createCourse(
+      CourseEntity(
+        courseName: params.courseName
+      )
     );
   }
 }

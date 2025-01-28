@@ -7,7 +7,7 @@ import 'package:softwarica_student_management_bloc/features/auth/domain/reposito
 import 'package:softwarica_student_management_bloc/features/batch/domain/entity/batch_entity.dart';
 import 'package:softwarica_student_management_bloc/features/course/domain/entity/course_entity.dart';
 
-class RegisterUserParams extends Equatable {
+class CreateAuthParams extends Equatable {
   final String fname;
   final String lname;
   final String phone;
@@ -16,18 +16,7 @@ class RegisterUserParams extends Equatable {
   final String username;
   final String password;
 
-  const RegisterUserParams({
-    required this.fname,
-    required this.lname,
-    required this.phone,
-    required this.batch,
-    required this.courses,
-    required this.username,
-    required this.password,
-  });
-
-  //intial constructor
-  const RegisterUserParams.initial({
+  const CreateAuthParams({
     required this.fname,
     required this.lname,
     required this.phone,
@@ -38,26 +27,26 @@ class RegisterUserParams extends Equatable {
   });
 
   @override
-  List<Object?> get props =>
-      [fname, lname, phone, batch, courses, username, password];
+  List<Object?> get props => [fname, lname, phone, batch, courses, username, password];
 }
 
-class RegisterUseCase implements UsecaseWithParams<void, RegisterUserParams> {
-  final IAuthRepository repository;
+class CreateAuthUsecase implements UsecaseWithParams<void, CreateAuthParams> {
+  final IAuthRepository authRepository;
 
-  RegisterUseCase(this.repository);
+  CreateAuthUsecase({required this.authRepository});
 
   @override
-  Future<Either<Failure, void>> call(RegisterUserParams params) {
-    final authEntity = AuthEntity(
-      fName: params.fname,
-      lName: params.lname,
-      phone: params.phone,
-      batch: params.batch,
-      courses: params.courses,
-      username: params.username,
-      password: params.password,
+  Future<Either<Failure, void>> call(CreateAuthParams params) async{
+    return await authRepository.createAuth(
+      AuthEntity(
+        fname: params.fname, 
+        lname: params.lname, 
+        phone: params.phone, 
+        batch: params.batch,
+        courses: params.courses,
+        username: params.username, 
+        password: params.password
+      )
     );
-    return repository.registerStudent(authEntity);
   }
 }

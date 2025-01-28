@@ -8,28 +8,23 @@ class LoginParams extends Equatable {
   final String username;
   final String password;
 
-  const LoginParams({
-    required this.username,
-    required this.password,
-  });
+  const LoginParams({required this.username, required this.password});
 
-  // Initial Constructor
   const LoginParams.initial()
-      : username = '',
-        password = '';
-
+    : username = "",
+      password = "";
+  
   @override
-  List<Object> get props => [username, password];
+  List<Object?> get props => [username, password];
 }
 
-class LoginUseCase implements UsecaseWithParams<String, LoginParams> {
-  final IAuthRepository repository;
+class LoginUsecase implements UsecaseWithParams<void, LoginParams> {
+  final IAuthRepository authRepository;
 
-  LoginUseCase(this.repository);
+  LoginUsecase({required this.authRepository});
 
   @override
-  Future<Either<Failure, String>> call(LoginParams params) {
-    // IF api then store token in shared preferences
-    return repository.loginStudent(params.username, params.password);
+  Future<Either<Failure, void>> call(LoginParams params) async {
+    return await authRepository.login(params.username, params.password);
   }
 }

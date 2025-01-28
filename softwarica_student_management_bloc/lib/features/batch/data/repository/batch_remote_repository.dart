@@ -1,41 +1,47 @@
 import 'package:dartz/dartz.dart';
 import 'package:softwarica_student_management_bloc/core/error/failure.dart';
-import 'package:softwarica_student_management_bloc/features/batch/data/data_source/batch_remote_data_source.dart';
+import 'package:softwarica_student_management_bloc/features/batch/data/data_source/remote_datasource/batch_remote_datasource.dart';
 import 'package:softwarica_student_management_bloc/features/batch/domain/entity/batch_entity.dart';
 import 'package:softwarica_student_management_bloc/features/batch/domain/repository/batch_repository.dart';
 
 class BatchRemoteRepository implements IBatchRepository {
-  final BatchRemoteDataSource batchRemoteDataSource;
+  final BatchRemoteDatasource _batchRemoteDatasource;
 
-  BatchRemoteRepository({required this.batchRemoteDataSource});
+  BatchRemoteRepository({required BatchRemoteDatasource batchRemoteDatasource})
+      : _batchRemoteDatasource = batchRemoteDatasource;
 
   @override
-  Future<Either<Failure, void>> createBatch(BatchEntity batch) async {
-    try {
-      batchRemoteDataSource.createBatch(batch);
+  Future<Either<Failure, void>> createBatch(BatchEntity batchEntity) async {
+     try {
+      _batchRemoteDatasource.createBatch(batchEntity);
       return Right(null);
-    } catch (e) {
-      return Left(ApiFailure(
-        message: e.toString(),
-      ));
+    }
+    catch(e) {
+      return Left(
+        ApiFailure(
+          message: e.toString()
+        )
+      );
     }
   }
 
   @override
   Future<Either<Failure, void>> deleteBatch(String id) {
+    // TODO: implement deleteBatch
     throw UnimplementedError();
   }
 
   @override
-  Future<Either<Failure, List<BatchEntity>>> getBatches() async {
+  Future<Either<Failure, List<BatchEntity>>> getAllBatches() async {
     try {
-      final batches = await batchRemoteDataSource.getBatches();
+      final batches = await _batchRemoteDatasource.getAllBatches();
       return Right(batches);
-    } catch (e) {
+    }
+    catch(e) {
       return Left(
         ApiFailure(
-          message: e.toString(),
-        ),
+          message: e.toString()
+        )
       );
     }
   }

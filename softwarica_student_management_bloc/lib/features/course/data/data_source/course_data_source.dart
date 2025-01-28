@@ -2,6 +2,6 @@ import 'package:softwarica_student_management_bloc/features/course/domain/entity
 
 abstract interface class ICourseDataSource {
   Future<List<CourseEntity>> getCourses();
-  Future<void> createCourse(CourseEntity course);
+  Future<void> createCourse(CourseEntity courseEntity);
   Future<void> deleteCourse(String id);
 }

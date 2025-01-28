@@ -1,5 +1,6 @@
 part of 'register_bloc.dart';
 
+@immutable
 sealed class RegisterEvent extends Equatable {
   const RegisterEvent();
 
@@ -10,23 +11,26 @@ sealed class RegisterEvent extends Equatable {
 class LoadCoursesAndBatches extends RegisterEvent {}
 
 class RegisterStudent extends RegisterEvent {
-  final BuildContext context;
-  final String fName;
-  final String lName;
+  final String fname;
+  final String lname;
   final String phone;
   final BatchEntity batch;
   final List<CourseEntity> courses;
   final String username;
   final String password;
 
-  const RegisterStudent({
-    required this.context,
-    required this.fName,
-    required this.lName,
-    required this.phone,
-    required this.batch,
-    required this.courses,
-    required this.username,
-    required this.password,
-  });
+  const RegisterStudent(
+    this.fname,
+    this.lname,
+    this.phone,
+    this.batch,
+    this.courses,
+    this.username,
+    this.password,
+  );
+
+  @override
+  List<Object> get props => [fname, lname, phone, batch, courses, username, password];
 }
+
+

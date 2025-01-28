@@ -6,8 +6,8 @@ part of 'get_all_batch_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetAllBatchDTO _$GetAllBatchDTOFromJson(Map<String, dynamic> json) =>
-    GetAllBatchDTO(
+GetAllBatchDto _$GetAllBatchDtoFromJson(Map<String, dynamic> json) =>
+    GetAllBatchDto(
       success: json['success'] as bool,
       count: (json['count'] as num).toInt(),
       data: (json['data'] as List<dynamic>)
@@ -15,7 +15,7 @@ GetAllBatchDTO _$GetAllBatchDTOFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$GetAllBatchDTOToJson(GetAllBatchDTO instance) =>
+Map<String, dynamic> _$GetAllBatchDtoToJson(GetAllBatchDto instance) =>
     <String, dynamic>{
       'success': instance.success,
       'count': instance.count,

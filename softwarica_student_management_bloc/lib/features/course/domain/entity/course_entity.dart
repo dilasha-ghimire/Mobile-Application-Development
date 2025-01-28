@@ -6,7 +6,7 @@ class CourseEntity extends Equatable {
 
   const CourseEntity({
     this.courseId,
-    required this.courseName,
+    required this.courseName
   });
 
   @override

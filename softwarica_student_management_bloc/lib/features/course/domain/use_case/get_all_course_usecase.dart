@@ -5,13 +5,12 @@ import 'package:softwarica_student_management_bloc/features/course/domain/entity
 import 'package:softwarica_student_management_bloc/features/course/domain/repository/course_repository.dart';
 
 class GetAllCourseUsecase implements UsecaseWithoutParams<List<CourseEntity>> {
-  final ICourseRepository _courseRepository;
+  final ICourseRepository courseRepository;
 
-  GetAllCourseUsecase({required ICourseRepository courseRepository})
-      : _courseRepository = courseRepository;
+  GetAllCourseUsecase({required this.courseRepository});
 
   @override
   Future<Either<Failure, List<CourseEntity>>> call() {
-    return _courseRepository.getCourses();
+    return courseRepository.getAllCourses();
   }
 }

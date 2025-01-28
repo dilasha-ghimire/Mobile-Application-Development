@@ -4,55 +4,49 @@ import 'package:softwarica_student_management_bloc/app/constants/hive_table_cons
 import 'package:softwarica_student_management_bloc/features/batch/domain/entity/batch_entity.dart';
 import 'package:uuid/uuid.dart';
 
+// dart run build_runner build -d: run this command everytime to create adapter
+//also run it whenever there are new parameters added to the model
+
+//-d: delete conflicting files
+  //it deletes files and re-generates them
 part 'batch_hive_model.g.dart';
 
 @HiveType(typeId: HiveTableConstant.batchTableId)
 class BatchHiveModel extends Equatable {
   @HiveField(0)
-  final String? batchId;
+  final String batchId;
   @HiveField(1)
   final String batchName;
 
   BatchHiveModel({
     String? batchId,
-    required this.batchName,
+    required this.batchName
   }) : batchId = batchId ?? const Uuid().v4();
 
-  // Initail Constructor
+  //Initial constructor - for when the model is empty
   const BatchHiveModel.initial()
-      : batchId = '',
-        batchName = '';
+    : batchId = "",
+      batchName = "";
 
-  // From Entity
+  //To convert a BatchEntity object to a BatchHiveModel object
+  //It extracts values from the BatchEntity object (entity.batchId and entity.batchName) 
+    //and uses them to create and return a new BatchHiveModel instance
   factory BatchHiveModel.fromEntity(BatchEntity entity) {
     return BatchHiveModel(
       batchId: entity.batchId,
-      batchName: entity.batchName,
+      batchName: entity.batchName
     );
   }
 
-  // To Entity
+  //To return entity object to the ui
   BatchEntity toEntity() {
     return BatchEntity(
       batchId: batchId,
-      batchName: batchName,
+      batchName: batchName
     );
   }
-
+  
   @override
+  // TODO: implement props
   List<Object?> get props => [batchId, batchName];
 }
-
-
-
-  // // // From Entity List
-  // // static List<BatchHiveModel> fromEntityList(List<BatchEntity> entityList) {
-  // //   return entityList
-  // //       .map((entity) => BatchHiveModel.fromEntity(entity))
-  // //       .toList();
-  // // }
-
-  // // To Entity List
-  // static List<BatchEntity> toEntityList(List<BatchHiveModel> hiveList) {
-  //   return hiveList.map((hive) => hive.toEntity()).toList();
-  // }

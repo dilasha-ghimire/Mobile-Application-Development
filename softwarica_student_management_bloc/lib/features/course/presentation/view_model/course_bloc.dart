@@ -1,5 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:softwarica_student_management_bloc/features/course/domain/entity/course_entity.dart';
 import 'package:softwarica_student_management_bloc/features/course/domain/use_case/create_course_usecase.dart';
 import 'package:softwarica_student_management_bloc/features/course/domain/use_case/delete_course_usecase.dart';
@@ -9,67 +10,59 @@ part 'course_event.dart';
 part 'course_state.dart';
 
 class CourseBloc extends Bloc<CourseEvent, CourseState> {
-  final GetAllCourseUsecase _getAllCourseUsecase;
   final CreateCourseUsecase _createCourseUsecase;
+  final GetAllCourseUsecase _getAllCourseUsecase;
   final DeleteCourseUsecase _deleteCourseUsecase;
-  CourseBloc({
-    required GetAllCourseUsecase getAllCourseUsecase,
-    required CreateCourseUsecase createCourseUsecase,
-    required DeleteCourseUsecase deleteCourseUsecase,
-  })  : _getAllCourseUsecase = getAllCourseUsecase,
-        _createCourseUsecase = createCourseUsecase,
+
+  CourseBloc(
+      {required CreateCourseUsecase createCourseUsecase,
+      required GetAllCourseUsecase getAllCourseUsecase,
+      required DeleteCourseUsecase deleteCourseUsecase})
+      : _createCourseUsecase = createCourseUsecase,
+        _getAllCourseUsecase = getAllCourseUsecase,
         _deleteCourseUsecase = deleteCourseUsecase,
         super(CourseState.initial()) {
-    on<CourseLoad>(_onCourseLoad);
-    on<CreateCourse>(_onCreateCourse);
+    on<LoadCourses>(_onLoadCourses);
+    on<AddCourse>(_onAddCourse);
     on<DeleteCourse>(_onDeleteCourse);
 
-    add(CourseLoad());
+    add(LoadCourses());
   }
 
-  Future<void> _onCourseLoad(
-    CourseLoad event,
-    Emitter<CourseState> emit,
-  ) async {
+  Future<void> _onLoadCourses(
+      LoadCourses event, Emitter<CourseState> emit) async {
     emit(state.copyWith(isLoading: true));
-    final result = await _getAllCourseUsecase();
+    final result = await _getAllCourseUsecase.call();
     result.fold(
-      (failure) =>
-          emit(state.copyWith(isLoading: false, error: failure.message)),
-      (courses) => emit(state.copyWith(isLoading: false, courses: courses)),
-    );
+        (failure) =>
+            emit(state.copyWith(isLoading: false, error: failure.message)),
+        (courses) => emit(state.copyWith(isLoading: false, courses: courses)));
   }
 
-  Future<void> _onCreateCourse(
-    CreateCourse event,
-    Emitter<CourseState> emit,
-  ) async {
+  Future<void> _onAddCourse(AddCourse event, Emitter<CourseState> emit) async {
     emit(state.copyWith(isLoading: true));
-    final result = await _createCourseUsecase(
-        CreateCourseParams(courseName: event.courseName));
+    final result = await _createCourseUsecase
+        .call(CreateCourseParams(courseName: event.courseName));
     result.fold(
-      (failure) =>
-          emit(state.copyWith(isLoading: false, error: failure.message)),
-      (_) {
-        emit(state.copyWith(isLoading: false));
-        add(CourseLoad());
-      },
-    );
+        (failure) =>
+            emit(state.copyWith(isLoading: false, error: failure.message)),
+        (courses) {
+      emit(state.copyWith(isLoading: false, error: null));
+      add(LoadCourses());
+    });
   }
 
   Future<void> _onDeleteCourse(
-    DeleteCourse event,
-    Emitter<CourseState> emit,
-  ) async {
+      DeleteCourse event, Emitter<CourseState> emit) async {
     emit(state.copyWith(isLoading: true));
-    final result = await _deleteCourseUsecase(DeleteCourseParams(id: event.id));
+    final result = await _deleteCourseUsecase
+        .call(DeleteCourseParams(courseId: event.courseId));
     result.fold(
-      (failure) =>
-          emit(state.copyWith(isLoading: false, error: failure.message)),
-      (_) {
-        emit(state.copyWith(isLoading: false));
-        add(CourseLoad());
-      },
-    );
+        (failure) =>
+            emit(state.copyWith(isLoading: false, error: failure.message)),
+        (courses) {
+      emit(state.copyWith(isLoading: false, error: null));
+      add(LoadCourses());
+    });
   }
 }

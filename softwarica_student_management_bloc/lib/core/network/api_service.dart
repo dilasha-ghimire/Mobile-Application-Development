@@ -15,13 +15,11 @@ class ApiService {
       ..options.receiveTimeout = ApiEndpoints.receiveTimeout
       ..interceptors.add(DioErrorInterceptor())
       ..interceptors.add(PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseHeader: true,
+        requestHeader: true, requestBody: true, responseHeader: true
       ))
       ..options.headers = {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        "Accept": "application/json",
+        "Content-type": "application/json"
       };
   }
 }

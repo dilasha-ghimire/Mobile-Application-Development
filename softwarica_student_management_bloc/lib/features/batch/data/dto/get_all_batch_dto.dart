@@ -1,22 +1,21 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:softwarica_student_management_bloc/features/batch/data/model/batch_api_model.dart';
-
 part 'get_all_batch_dto.g.dart';
 
-@JsonSerializable()
-class GetAllBatchDTO {
+@JsonSerializable() 
+class GetAllBatchDto {
   final bool success;
   final int count;
   final List<BatchApiModel> data;
 
-  GetAllBatchDTO({
+  GetAllBatchDto({
     required this.success,
     required this.count,
-    required this.data,
+    required this.data
   });
 
-  Map<String, dynamic> toJson() => _$GetAllBatchDTOToJson(this);
+  Map<String, dynamic> toJson() => _$GetAllBatchDtoToJson(this);
 
-  factory GetAllBatchDTO.fromJson(Map<String, dynamic> json) =>
-      _$GetAllBatchDTOFromJson(json);
+  factory GetAllBatchDto.fromJson(Map<String, dynamic> json) =>
+    _$GetAllBatchDtoFromJson(json);
 }

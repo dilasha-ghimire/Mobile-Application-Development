@@ -1,28 +1,29 @@
 part of 'course_bloc.dart';
 
+@immutable 
 sealed class CourseEvent extends Equatable {
   const CourseEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
-class CourseLoad extends CourseEvent {}
+final class LoadCourses extends CourseEvent {}
 
-class CreateCourse extends CourseEvent {
+final class AddCourse extends CourseEvent {
   final String courseName;
-
-  const CreateCourse({required this.courseName});
-
-  @override
-  List<Object> get props => [courseName];
-}
-
-class DeleteCourse extends CourseEvent {
-  final String id;
-
-  const DeleteCourse({required this.id});
+  const AddCourse(this.courseName);
 
   @override
-  List<Object> get props => [id];
+  List<Object?> get props => [courseName];
 }
+
+final class DeleteCourse extends CourseEvent {
+  final String courseId;
+
+  const DeleteCourse(this.courseId);
+
+  @override
+  List<Object?> get props => [courseId];
+}
+

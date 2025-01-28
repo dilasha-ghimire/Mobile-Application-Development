@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:softwarica_student_management_bloc/core/common/snackbar/my_snackbar.dart';
 import 'package:softwarica_student_management_bloc/features/auth/presentation/view/register_view.dart';
 import 'package:softwarica_student_management_bloc/features/auth/presentation/view_model/login/login_bloc.dart';
 
@@ -11,7 +12,6 @@ class LoginView extends StatelessWidget {
   final _passwordController = TextEditingController(text: 'kiran123');
 
   final _gap = const SizedBox(height: 8);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,12 +24,23 @@ class LoginView extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 child: Column(
                   children: [
-                    const Text(
-                      'Login',
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontFamily: 'Brand Bold',
-                      ),
+                    // const Text(
+                    //   'Login',
+                    //   style: TextStyle(
+                    //     fontSize: 30,
+                    //     fontFamily: 'Brand Bold',
+                    //   ),
+                    // ),
+                    BlocBuilder<LoginBloc, LoginState>(
+                      builder: (context, state) {
+                        return Text(
+                          'Login',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontFamily: 'Brand Bold',
+                          ),
+                        );
+                      },
                     ),
                     _gap,
                     TextFormField(
@@ -72,22 +83,12 @@ class LoginView extends StatelessWidget {
                                   password: _passwordController.text,
                                 ),
                               );
-
-                          //   if (_usernameController.text == 'kiran' &&
-                          //       _passwordController.text == 'kiran123') {
-                          //     context.read<LoginBloc>().add(
-                          //           NavigateHomeScreenEvent(
-                          //             destination: HomeView(),
-                          //             context: context,
-                          //           ),
-                          //         );
-                          //   } else {
-                          //     showMySnackBar(
-                          //       context: context,
-                          //       message: 'Invalid username or password',
-                          //       color: Colors.red,
-                          //     );
-                          //   }
+                        } else {
+                          showMySnackBar(
+                            context: context,
+                            message: 'Invalid username or password',
+                            color: Colors.red,
+                          );
                         }
                       },
                       child: const SizedBox(
